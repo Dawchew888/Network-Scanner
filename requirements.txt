@@ -1,4 +1,4 @@
-pymysql
-redis
-paramiko
-requests
+paramiko>=2.7.2
+pymysql>=1.0.2
+redis>=4.0.2
+requests>=2.26.0
