@@ -1,188 +1,191 @@
-# Network Scanner v0.1
+# Network Scanner 网络扫描工具
 
-English | [中文](#中文说明)
+[English](#english) | [中文](#中文)
 
-A versatile network scanning tool written in Python.
+## English
+
+### Description
+
+Network Scanner is a comprehensive network security testing tool that integrates multiple scanning functionalities. This tool is designed for network security professionals and system administrators to perform security assessments and vulnerability scanning.
+
+### Features
+
+- 🔍 Port Scanning
+- 🖥️ Host Discovery
+- 🔑 Service Brute Force
+  - MySQL weak password scanning
+  - Redis unauthorized access and weak password detection
+  - SSH weak password scanning
+- 🌐 Subdomain Scanning
+
+### Prerequisites
+
+```bash
+Python 3.6+
+```
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Dawchew888/Network-Scanner.git
+cd Network-Scanner
+```
+
+2. Install required dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Required packages:
+- paramiko
+- pymysql
+- redis
+- requests
+
+### Usage
+
+The tool provides several scanning modules that can be used independently:
+
+1. **Port Scanning**
+```bash
+python scan-tools.py port -h [TARGET] -p [PORTS]
+# Example: Scan ports 80-1000
+python scan-tools.py port 192.168.1.1 -p 80-1000
+```
+
+2. **Host Discovery**
+```bash
+python scan-tools.py host [NETWORK]
+# Example: Scan entire subnet
+python scan-tools.py host 192.168.1.0/24
+```
+
+3. **MySQL Weak Password Scanning**
+```bash
+python scan-tools.py mysql [TARGET] -P [PORT] -u [USER_DICT] -p [PASS_DICT]
+# Example:
+python scan-tools.py mysql 192.168.1.1 -P 3306
+```
+
+4. **Redis Security Scanning**
+```bash
+python scan-tools.py redis [TARGET] -P [PORT] -p [PASS_DICT]
+# Example:
+python scan-tools.py redis 192.168.1.1 -P 6379
+```
+
+5. **SSH Weak Password Scanning**
+```bash
+python scan-tools.py ssh [TARGET] -P [PORT] -u [USER_DICT] -p [PASS_DICT]
+# Example:
+python scan-tools.py ssh 192.168.1.1 -P 22
+```
+
+6. **Subdomain Scanning**
+```bash
+python scan-tools.py subdomain [DOMAIN] -d [SUBDOMAIN_DICT]
+# Example:
+python scan-tools.py subdomain example.com
+```
+
+### Notes
+
+- This tool is for authorized security testing only
+- Please ensure you have proper authorization before scanning any targets
+- Some features might require root/administrator privileges
 
 ---
 
-## About The Project
+## 中文
 
-**Network Scanner** is a command-line tool designed for network reconnaissance and security testing. It supports multiple scanning modes such as brute-force attacks (MySQL, Redis, SSH), host discovery, port scanning, and subdomain enumeration.
+### 项目描述
 
----
+Network Scanner 是一个综合性的网络安全测试工具，集成了多种扫描功能。该工具专为网络安全专业人员和系统管理员设计，用于执行安全评估和漏洞扫描。
 
-## Features
+### 功能特点
 
-- **MySQL/Redis/SSH Brute-force:** Detect weak credentials.
-- **Host Discovery:** Find live hosts in a network segment.
-- **Port Scanning:** Scan single ports, ranges, or lists.
-- **Subdomain Enumeration:** Discover subdomains with default or custom dictionaries.
+- 🔍 端口扫描
+- 🖥️ 主机发现
+- 🔑 服务弱口令检测
+  - MySQL 弱口令扫描
+  - Redis 未授权访问和弱口令检测
+  - SSH 弱口令扫描
+- 🌐 子域名扫描
 
----
+### 环境要求
 
-## Usage
-
-The tool uses a command-based structure. Below are some examples:
-
-### 1. MySQL Brute-force (`mysql`)
-
-Scan a single host with default dictionaries:
 ```bash
-python security_tool.py mysql 192.168.1.10
+Python 3.6+
 ```
 
-Scan an IP range with a specified port and dictionaries:
+### 安装说明
+
+1. 克隆仓库：
 ```bash
-python security_tool.py mysql 192.168.1.1-100 -P 3307 -u my_users.txt -p my_pass.txt
+git clone https://github.com/Dawchew888/Network-Scanner.git
+cd Network-Scanner
 ```
 
----
-
-### 2. Redis Brute-force (`redis`)
-
-Scan a single host:
+2. 安装依赖：
 ```bash
-python security_tool.py redis 192.168.1.11
+pip install -r requirements.txt
 ```
 
-Scan a CIDR network with a specified password dictionary:
+所需包：
+- paramiko
+- pymysql
+- redis
+- requests
+
+### 使用教程
+
+该工具提供了多个可独立使用的扫描模块：
+
+1. **端口扫描**
 ```bash
-python security_tool.py redis 192.168.1.0/24 -p common_redis_pass.txt
+python scan-tools.py port -h [目标] -p [端口范围]
+# 示例：扫描80-1000端口
+python scan-tools.py port 192.168.1.1 -p 80-1000
 ```
 
----
-
-### 3. SSH Brute-force (`ssh`)
-
-Scan a single host:
+2. **主机发现**
 ```bash
-python security_tool.py ssh 192.168.1.12
+python scan-tools.py host [网段]
+# 示例：扫描整个子网
+python scan-tools.py host 192.168.1.0/24
 ```
 
----
-
-### 4. Host Discovery (`host`)
-
-Scan a class C network:
+3. **MySQL 弱口令扫描**
 ```bash
-python security_tool.py host 192.168.1.0/24
+python scan-tools.py mysql [目标] -P [端口] -u [用户名字典] -p [密码字典]
+# 示例：
+python scan-tools.py mysql 192.168.1.1 -P 3306
 ```
 
----
-
-### 5. Port Scan (`port`)
-
-Scan specific ports:
+4. **Redis 安全扫描**
 ```bash
-python security_tool.py port 192.168.1.1 -p 80,443,8080
+python scan-tools.py redis [目标] -P [端口] -p [密码字典]
+# 示例：
+python scan-tools.py redis 192.168.1.1 -P 6379
 ```
 
-Scan a range of ports:
+5. **SSH 弱口令扫描**
 ```bash
-python security_tool.py port 192.168.1.1 -p 1-1024
+python scan-tools.py ssh [目标] -P [端口] -u [用户名字典] -p [密码字典]
+# 示例：
+python scan-tools.py ssh 192.168.1.1 -P 22
 ```
 
----
-
-### 6. Subdomain Scan (`subdomain`)
-
-Scan a domain with the default dictionary:
+6. **子域名扫描**
 ```bash
-python security_tool.py subdomain example.com
+python scan-tools.py subdomain [域名] -d [子域名字典]
+# 示例：
+python scan-tools.py subdomain example.com
 ```
 
-Scan with a custom dictionary:
-```bash
-python security_tool.py subdomain example.com -d custom_subs.txt
-```
+### 注意事项
 
----
-
-## Disclaimer
-
-**This tool is intended for educational purposes and authorized security testing only. Unauthorized scanning of networks is illegal. The author is not responsible for any misuse or damage caused by this tool.**
-
----
-
-## 中文说明
-
-本工具使用子命令结构来调用不同功能。
-
-### 1. MySQL 弱口令扫描 (`mysql`)
-
-使用默认字典扫描单个主机：
-```bash
-python security_tool.py mysql 192.168.1.10
-```
-
-指定端口和字典文件，扫描一个IP范围：
-```bash
-python security_tool.py mysql 192.168.1.1-100 -P 3307 -u my_users.txt -p my_pass.txt
-```
-
----
-
-### 2. Redis 弱口令扫描 (`redis`)
-
-扫描单个主机：
-```bash
-python security_tool.py redis 192.168.1.11
-```
-
-指定密码字典，扫描一个C段网络：
-```bash
-python security_tool.py redis 192.168.1.0/24 -p common_redis_pass.txt
-```
-
----
-
-### 3. SSH 弱口令扫描 (`ssh`)
-
-扫描单个主机：
-```bash
-python security_tool.py ssh 192.168.1.12
-```
-
----
-
-### 4. 主机发现 (`host`)
-
-扫描一个C段网络：
-```bash
-python security_tool.py host 192.168.1.0/24
-```
-
----
-
-### 5. 端口扫描 (`port`)
-
-扫描指定端口：
-```bash
-python security_tool.py port 192.168.1.1 -p 80,443,8080
-```
-
-扫描端口范围：
-```bash
-python security_tool.py port 192.168.1.1 -p 1-1024
-```
-
----
-
-### 6. 子域名扫描 (`subdomain`)
-
-使用默认字典扫描域名：
-```bash
-python security_tool.py subdomain example.com
-```
-
-使用自定义字典进行扫描：
-```bash
-python security_tool.py subdomain example.com -d custom_subs.txt
-```
-
----
-
-## 免责声明
-
-本工具仅用于教育目的和授权下的安全测试。未经授权扫描网络是违法的。对于因滥用或不当使用此程序而造成的任何损害，作者概不负责。
+- 本工具仅用于授权的安全测试
+- 使用前请确保已获得目标系统的授权
+- 某些功能可能需要 root/管理员权限
